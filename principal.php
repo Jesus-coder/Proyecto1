@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="estilos.css">
+	<link rel="stylesheet" href="css/estilos.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
@@ -11,9 +11,12 @@
 <nav>
         <ul class="menu">  
             <li><a href="">Reservas</a></li>
-            <li><a href="">Prueba1</a></li>   
-            <li><a href="">Prueba2</a></li>
-            <a href=""><li style="position: absolute; right: 110px; top: 8px"><img src="imagenes/salir.jpg"></li></a>  
+            <li><a href="">Historial</a></li>   
+            <li><a href="">Incidencias</a></li>
+            <?php
+            include "header.php";
+            ?>
+            <a href=""><li style="position: absolute; right: 110px; top: 8px"></li></a>  
         </ul>   
 </nav>
 </center>

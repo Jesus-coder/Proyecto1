@@ -13,7 +13,7 @@ and open the template in the editor.
     </script>
     <body>
         <p id="alerta" class="alerta" style='text-align: center' ></p>
-        <form id='login' action='' method='post' accept-charset='UTF-8' onsubmit = "return ValidacionLogin()">
+        <form id='login' action='login.proc.php' method='post' accept-charset='UTF-8' onsubmit = "return ValidacionLogin()">
                 <table>
                     <tr>
                         <th><legend>Login</legend></th>
@@ -21,7 +21,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <th><label for='username' >Nombre de Usuario:</label></th>
-                        <th><input type='text' placeholder="Introduce el usuario" pattern="[A-Za-z]{1,15}" name='username' id='username'  value="<?php 
+                        <th><input type='text' placeholder="Introduce el usuario" pattern="[a-z]{1,15}" name='username' id='username'  value="<?php 
                                 if (isset($_GET['us'])) {
                                     $user=$_GET['us'];
                                     echo "$user";

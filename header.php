@@ -4,12 +4,13 @@
 	<title></title>
 </head>
 <body>
-	<div style="text-align: right;">
+	<div style="position: absolute; right: 110px; top: 8px">
 		<?php
+		//Cerrar sesion de ".$_SESSION['nombre']."
 		//Utilizar la variable $_SESSION anteriormente configurada
 		session_start();
 		if(isset($_SESSION['nombre'])){
-			echo "<a href='logout.php'>Cerrar sesion de ".$_SESSION['nombre']."</a>&nbsp;&nbsp;";
+			echo "Cerrar sesion de ".$_SESSION['nombre']."<a href='logout.php'><img src='imagenes/salir.jpg'></a>&nbsp;&nbsp;";
 		}else{
 			header("Location: index.php");
 		}
