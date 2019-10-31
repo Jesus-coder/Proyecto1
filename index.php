@@ -21,7 +21,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <th><label for='username' >Nombre de Usuario:</label></th>
-                        <th><input type='text' placeholder="Introduce el usuario" pattern="[a-z]{1,15}" name='username' id='username'  value="<?php 
+                        <th><input type='text' placeholder="Introduce el usuario" pattern="[A-Za-z]{1,15}" name='username' id='username'  value="<?php 
                                 if (isset($_GET['us'])) {
                                     $user=$_GET['us'];
                                     echo "$user";
