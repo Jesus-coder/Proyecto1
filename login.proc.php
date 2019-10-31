@@ -13,7 +13,7 @@
 	  
       $sql = "SELECT id_usuarios FROM tbl_usuarios WHERE nombre_usuario = '$myusername' and pwd_usuarios = '$pass'";
 	  
-	   $pass = md5($mypassword);
+	
       $result = mysqli_query($connexion,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
      
