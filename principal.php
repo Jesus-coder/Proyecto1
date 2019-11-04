@@ -22,32 +22,50 @@
 </center>
 <br><br><br>
 <!-- Filtros -->
-<form action="">
-<input type="checkbox" name="prueba1" value="prueba1"> prueba1
-<input type="checkbox" name="prueba2" value="prueba2"> prueba2
-<input type="checkbox" name="prueba3" value="prueba3" checked> prueba3
+<form action="filtros.php" method="post">
+<input type="checkbox" name="sala" value="S" checked> Salas
+<input type="checkbox" name="objeto" value="O"> Objeto
 <input type="submit" value="Filtrar">
 </form><br>
 <table class="tabla">
-	<!-- Primera Fila -->
-  <tr class="tabla">
-    <th class="tabla">Sala de informatica con ordenadores</th>
-    <th class="tabla">Sala2</th> 
-    <th class="tabla">Sala3</th>
-  </tr>
-  	<!-- Segunda Fila -->
-  <tr class="tabla">
-    <td class="tabla">Reservado</td>
-    <td class="tabla">Libre</td>
-    <td class="tabla">Averiado</td>
-  </tr>
-</table>
-<table>
-	<tr>
-	<th><a class="boton" href="">Reservar</a></th>
-    <th><a class="boton" href="">Reservar</a></th>
-    <th><a class="boton" href="">Reservar</a></th>
-    </tr>
+    <?php
+    //Conectamos a la base de datos
+    require_once 'conexion.php';
+    
+    //Si la variable que devuelve filtros.php no esta inicializada que me muestre todos los recursos, en caso contrario que me muestre los recursos que ha filtrado el usuario
+    if (!isset ($_GET['fl'])){
+        $filtro='C';
+    }else{
+        $filtro=$_GET['fl'];
+    }
+    
+    //Hacemos un switch para las querys, segun el filtro hará una consulta diferente
+    switch ($filtro) {
+            case 'C' :
+                $sql = mysqli_query($connexion, "SELECT R.nombre_recursos, R.estado_recursos, I.nombre_tiporecursos FROM tbl_recursos R LEFT JOIN tbl_tiporecursos I ON R.id_tiporecursos=I.id_tiporecursos");
+                break;
+            case 'S' :
+                $sql = mysqli_query($connexion, "SELECT R.nombre_recursos, R.estado_recursos, I.nombre_tiporecursos FROM tbl_recursos R LEFT JOIN tbl_tiporecursos I ON R.id_tiporecursos=I.id_tiporecursos WHERE I.id_tiporecursos=1");
+                break;
+            case 'O' :
+                $sql = mysqli_query($connexion, "SELECT R.nombre_recursos, R.estado_recursos, I.nombre_tiporecursos FROM tbl_recursos R LEFT JOIN tbl_tiporecursos I ON R.id_tiporecursos=I.id_tiporecursos WHERE I.id_tiporecursos=2");
+                break;
+        }
+        
+    //Mostrar las tablas filtradas
+        while ($res = mysqli_fetch_array($sql)) {
+                    echo '<tr class="tabla">';
+                    echo '<th class="tabla">' . $res["nombre_recursos"] . '</th>';
+                    echo '<th class="tabla">' . $res["estado_recursos"] . '</th>';
+                    echo '<th class="tabla">' . $res["nombre_tiporecursos"] . '</th>';
+                    echo '</tr>';
+                    if ($res["estado_recursos"]=="disponible"){
+                    echo '<th>' . '<a class="boton" href="">Reservar</a>' . '</th>';
+                    }else{
+                        echo '<th>' . '<a class="boton">Reservado</a>' . '</th>';
+                    }
+                }
+        ?>
 </table>
 </body>
 </html>
