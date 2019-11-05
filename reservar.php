@@ -16,7 +16,7 @@ include("conexion.php");
 			      	echo 'if disponible';
 			      	$update="UPDATE `tbl_recursos` SET `estado_recursos` = 'ocupado' WHERE `tbl_recursos`.`id_recursos` = $chk1";
 			      	$sql_query_update=mysqli_query($connexion, $update);
-			      	$insert ="INSERT INTO `tbl_reservas` (`inicio_reservas`, `id_recursos`, `reserva_actual`, `id_usuarios` ) VALUES ('$fecha', ".$chk1.", 1, (SELECT `id_usuarios` FROM `tbl_usuarios` WHERE `nombre_usuarios`='".$usuario."'))";
+			      	$insert ="INSERT INTO `tbl_reservas` (`inicio_reservas`, `id_recursos`, `id_usuarios` ) VALUES ('$fecha', ".$chk1.", (SELECT `id_usuarios` FROM `tbl_usuarios` WHERE `nombre_usuarios`='".$usuario."'))";
 			      	echo $insert;
 			      	$sql_query_insert=mysqli_query($connexion, $insert);
 		      

@@ -11,7 +11,7 @@
 <nav>
         <ul class="menu">  
             <li><a href="">Reservas</a></li>
-            <li><a href="">Historial</a></li>   
+            <li><a href="historial.php">Historial</a></li>   
             <li><a href="">Incidencias</a></li>
             <?php
             include "header.php";
