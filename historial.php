@@ -40,7 +40,11 @@ while ($res = mysqli_fetch_array($sql_user)) {
                     echo '<tr class="tabla">';
                     echo '<th class="tabla">' . $res["id_reservas"] . '</th>';
                     echo '<th class="tabla">' . $res["inicio_reservas"] . '</th>';
-                    echo '<th class="tabla">' . $res["final_reservas"] . '</th>';
+                    if ($res["final_reservas"]==NULL){
+                        echo '<th class="tabla">' . 'Reserva en curso' . '</th>';
+                    }else{
+                        echo '<th class="tabla">' . $res["final_reservas"] . '</th>';
+                    }
                     echo '<th class="tabla">' . $res["nombre_recursos"] . '</th>';
                     echo '</tr>';
     }
