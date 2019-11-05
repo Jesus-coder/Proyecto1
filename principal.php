@@ -23,8 +23,22 @@
 <br><br><br>
 <!-- Filtros -->
 <form action="filtros.php" method="post">
-<input type="checkbox" name="sala" value="S" checked> Salas
-<input type="checkbox" name="objeto" value="O"> Objeto
+    <input type="checkbox" name="sala" value="S" <?php
+    if (isset($_GET['fl'])) {
+        $var = $_GET['fl'];
+        if ($var == 'S' || $var == 'C') {
+            echo "checked";
+        }
+    }
+        ?>> Salas
+    <input type="checkbox" name="objeto" value="O" <?php
+    if (isset($_GET['fl'])) {
+        $var = $_GET['fl'];
+        if ($var == 'O' || $var == 'C') {
+            echo "checked";
+        }
+    }
+    ?>> Objeto
 <input type="submit" value="Filtrar">
 </form><br>
 <table class="tabla">
