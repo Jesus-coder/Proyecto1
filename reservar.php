@@ -21,7 +21,7 @@ include("conexion.php");
 		     }
 		         
 		}
-		header('Location: principal.php')  
+		header('Location: principal.php');  
     } 
 
     if(isset($_POST['save2']))
@@ -45,6 +45,6 @@ include("conexion.php");
 		    }
 		         
 		}
-		header('Location: principal.php')  
+		header('Location: principal.php');  
 	}
 ?>
