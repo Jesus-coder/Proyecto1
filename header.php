@@ -8,17 +8,14 @@
 </head>
 <body>
 		<?php
-		//Cerrar sesion de ".$_SESSION['nombre']."
-		//Utilizar la variable $_SESSION anteriormente configurada
+		//Iniciamos la sesión
 		session_start();
+		// Comprobamos si la sesión está iniciado con un usuario
 		if(isset($_SESSION['nombre'])){
-			//echo "Cerrar sesion de ".$_SESSION['nombre'].""
-
-        
-        include "prueba.php";
-        
-
-}else{
+			// Si está iniciada la sesión con un usuario incluimos el menu.php para que se nos muestre el menu
+        	include "menu.php";
+		}else{
+			// Si no está iniciada la sesión con un usuario nos envia a index.php
 			header("Location: index.php");
 		}
 		?>
