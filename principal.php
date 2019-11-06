@@ -8,7 +8,7 @@
 <body>
 	<!-- Barra de Navegacion -->
 <center>
-<nav>
+    <nav>
         <ul class="menu">  
             <li><a href="">Reservas</a></li>
             <li><a href="historial.php">Historial</a></li>   
@@ -18,10 +18,9 @@
             ?>
             <a href=""><li style="position: absolute; right: 110px; top: 8px"></li></a>  
         </ul>   
-</nav>
+    </nav>
 </center>
 <br><br><br>
-<!-- Filtros -->
 <!-- Filtros -->
 <form action="filtros.php" method="post">
     <input type="checkbox" name="sala" value="S" <?php
@@ -40,7 +39,7 @@
         }
     }
     ?>> Objeto
-<input type="submit" value="Filtrar">
+    <input type="submit" value="Filtrar">
 </form><br>
 <table class="tabla">
     <?php
@@ -68,126 +67,134 @@
         }
         ?>
 <div>
-<form action="reservar.php" method="post" enctype="multipart/form-data">
-<!---Tabla de recursos que ven todos los usuarios --->
-<table border="1">
-<tr>
-<th align='center'colspan="4">Reservas</th>
-</tr>
-<?php
-    $usuarios = $_SESSION['nombre'];
-   //se incluye la pagina conexion.php para poder recoger la conexión a la BD
-  include("conexion.php");
-    $id_usuario= "SELECT id_usuarios FROM tbl_usuarios WHERE nombre_usuarios = '".$usuarios."'";
-    $sqlcomment = "SELECT column_comment FROM information_schema.columns WHERE table_name = 'tbl_recursos'";
-    $sqlrecursos = "SELECT *, tbl_tiporecursos.id_tiporecursos
-                    FROM tbl_recursos 
-                    LEFT JOIN tbl_tiporecursos 
-                    ON tbl_recursos.id_tiporecursos=tbl_tiporecursos.id_tiporecursos
-                    LEFT JOIN tbl_reservas 
-                    ON tbl_reservas.id_recursos=tbl_recursos.id_recursos $orderby" ;
-    $comments = mysqli_query($connexion, $sqlcomment);
-    $userid = mysqli_fetch_assoc(mysqli_query($connexion, $id_usuario));
-    while(($comment = mysqli_fetch_array($comments, MYSQLI_ASSOC)))
-          { 
-      
-            if($comment['column_comment'])
-               
-            {
-            
-                foreach ($comment as $head)
-                
+    <form action="reservar.php" method="post" enctype="multipart/form-data">
+    <!---Tabla de recursos que ven todos los usuarios --->
+        <table border="1">
+            <tr>
+                <th align='center'colspan="4">Reservas</th>
+            </tr>
+            <?php
+            $usuarios = $_SESSION['nombre'];
+            //se incluye la pagina conexion.php para poder recoger la conexión a la BD
+            include("conexion.php");
+            //consulta para obtener el id del usuario actual
+            $id_usuario= "SELECT id_usuarios 
+                          FROM tbl_usuarios 
+                          WHERE nombre_usuarios = '".$usuarios."'";
+            //consulta para extraer la columna comentario de la tabla, para darle nombre a las columnas de la tabla tbl_recurso
+            $sqlcomment = "SELECT column_comment 
+                            FROM information_schema.columns 
+                            WHERE table_name = 'tbl_recursos'";
+                //consulta para mostrar la tabla recursos con su tipo
+            $sqlrecursos = "SELECT *, tbl_tiporecursos.id_tiporecursos
+                            FROM tbl_recursos 
+                            LEFT JOIN tbl_tiporecursos 
+                            ON tbl_recursos.id_tiporecursos=tbl_tiporecursos.id_tiporecursos
+                            $orderby" ;
+            //consulta que muestra la tabla de recursos, su tipo, y las reservas para generar a posteriori la tabla mis reservas
+            $sqlrecursos2 = "SELECT *, tbl_tiporecursos.id_tiporecursos
+                            FROM tbl_recursos 
+                            LEFT JOIN tbl_tiporecursos 
+                            ON tbl_recursos.id_tiporecursos=tbl_tiporecursos.id_tiporecursos
+                            LEFT JOIN tbl_reservas 
+                            ON tbl_reservas.id_recursos=tbl_recursos.id_recursos $orderby";
+            $comments = mysqli_query($connexion, $sqlcomment);
+            $userid = mysqli_fetch_assoc(mysqli_query($connexion, $id_usuario));
+            //Bucle para recorrer la columna comentario de la tbl_recursos
+            while(($comment = mysqli_fetch_array($comments, MYSQLI_ASSOC)))
+            { 
+                  
+                if($comment['column_comment'])
+                           
                 {
-                           echo "<th align='center'>". $head . "</th>";
-            
+                        
+                    foreach ($comment as $head)
+                    {
+                    echo "<th align='center'>". $head . "</th>";                        
+                    }
                 }
-             // $i++;
             }
-          }
-          echo "</tr>";
-    //-- matriu de taules relacionades ---
-    $recursos = mysqli_query($connexion, $sqlrecursos);
-    while(($fila = mysqli_fetch_array($recursos)))
-      { 
-      if($fila['id_usuarios'] !== $userid['id_usuarios'] and $fila['estado_recursos'] == 'ocupado' or  $fila['estado_recursos'] == 'disponible'){
-?>
-        <tr>  
-        <td><?php echo $fila[1]; ?></td>
-        <td><?php echo $fila[2]; ?></td>
-        <td><?php echo $fila[5]; ?></td>
-        <?php
-        if($fila['estado_recursos'] == 'ocupado' or $fila['estado_recursos'] == 'incidencia'){
-          ?>
-          <td><input type="checkbox" name="recurso[]" value="<?php echo $fila[0]; ?>" disabled></td>
-          </tr>
-        <?php
-        } else {
-        ?>
-        <td><input type="checkbox" name="recurso[]" value="<?php echo $fila[0]; ?>"></td>
-        </tr>
-     
-<?php
-        }
-        
-      }
-        
-    }
-  
-?>
+            echo "</tr>";
+            //Ejecución de la consulta para mostrar tabla recursos
+            $recursos = mysqli_query($connexion, $sqlrecursos);
+            //Bucle para recorrer la tabla recursos y si el estado es ocupado, desabilita el checkbox
+            while(($fila = mysqli_fetch_array($recursos)))
+            { 
+                if($fila['estado_recursos'] == 'disponible'){
+                    ?>
+                    <tr>  
+                        <td><?php echo $fila[1]; ?></td>
+                        <td><?php echo $fila[2]; ?></td>
+                        <td><?php echo $fila[5]; ?></td>
+                        <td><input type="checkbox" name="recurso[]" value="<?php echo $fila[0]; ?>"></td>
+                    </tr>
+                        <?php
+                }else{
+                          ?>
+                    <tr>
+                        <td><?php echo $fila[1]; ?></td>
+                        <td><?php echo $fila[2]; ?></td>
+                        <td><?php echo $fila[5]; ?></td>
+                        <td><input type="checkbox" name="recurso[]" value="<?php echo $fila[0]; ?>" disabled></td>
+                    </tr>
+                        <?php 
+                } 
+            }     
+                        ?>
+                      
 
-</table>
-<input type="submit" value="reservar" name="save"></td> 
-</form>
-<div style="position: relative; left: 750px; bottom: 400px">
-<table border="1" >
-<tr>
-<th align='center' colspan="5">Mis Reservas</th>
-</tr>
-<form action="reservar.php" method="post" enctype="multipart/form-data">
-<?php
-$sqlcomment = "SELECT column_comment FROM information_schema.columns WHERE table_name = 'tbl_recursos' or table_name = 'tbl_reservas' and COLUMN_NAME = 'inicio_reservas'";
-$comments = mysqli_query($connexion, $sqlcomment);
-    while(($comment = mysqli_fetch_array($comments, MYSQLI_ASSOC)))
-          { 
-      
-            if($comment['column_comment'])
-               
-            {
-            
-                foreach ($comment as $head)
-                
-                {
-                           echo "<th align='center'>". $head . "</th>";
-            
-                }
-             // $i++;
-            }
-          }
-          echo "</tr>";
-    //-- matriu de taules relacionades ---
-    $recursos = mysqli_query($connexion, $sqlrecursos);
-    while(($fila = mysqli_fetch_array($recursos)))
-          { 
-          if($fila['estado_recursos'] == 'ocupado' and $fila['id_usuarios'] == $userid['id_usuarios'] and $fila['final_reservas'] == NULL ){
-?>
 
-            <tr>  
-            <td><?php echo $fila[1]; ?></td>
-            <td><?php echo $fila[2]; ?></td>
-            <td><?php echo $fila[5]; ?></td>
-            <td><?php echo $fila[7]; ?></td>
-
-            <td><input type="checkbox" name="recurso[]" value="<?php echo $fila[0]; ?>"></td>
-            </tr> 
-<?php
-          }
-
-  }
-?>
-</table>
-<input type="submit" value="Liberar" name="save2"></td> 
-</form>
+            <!---Tabla de reservas del propio usuario --->
+        </table>
+        <input type="submit" value="reservar" name="save"></td> 
+    </form>
 </div>
+<div style="position: relative; left: 750px; bottom: 400px">
+    <form action="reservar.php" method="post" enctype="multipart/form-data">
+        <table border="1" >  
+            <tr>
+                <th align='center' colspan="5">Mis Reservas</th>
+            </tr>
+            <?php
+            //consulta para extraer la columna comentario de la tabla, para darle nombre a las columnas de la tabla tbl_recurso y tbl_reservas
+            $sqlcomment = "SELECT column_comment FROM information_schema.columns WHERE table_name = 'tbl_recursos' or table_name = 'tbl_reservas' and COLUMN_NAME = 'inicio_reservas'";
+            $comments = mysqli_query($connexion, $sqlcomment);
+                while(($comment = mysqli_fetch_array($comments, MYSQLI_ASSOC)))
+                { 
+                    if($comment['column_comment'])     
+                    {
+                        foreach ($comment as $head)       
+                        {
+                            echo "<th align='center'>". $head . "</th>";
+                        
+                        }
+                    }
+                }
+                echo "</tr>";
+                //Ejecución consulta de la tabla de mis reservas
+                $recursos2 = mysqli_query($connexion, $sqlrecursos2);
+                while(($fila = mysqli_fetch_array($recursos2)))
+                { 
+                    if($fila['estado_recursos'] == 'ocupado' and $fila['id_usuarios'] == $userid['id_usuarios'] and $fila['final_reservas'] == NULL )
+                    {
+                        ?>
 
+                        <tr>  
+                            <td><?php echo $fila[1]; ?></td>
+                            <td><?php echo $fila[2]; ?></td>
+                            <td><?php echo $fila[5]; ?></td>
+                            <td><?php echo $fila[7]; ?></td>
+
+                            <td><input type="checkbox" name="recurso[]" value="<?php echo $fila[0]; ?>"></td>
+                        </tr> 
+                        <?php
+                    }
+
+                }
+            ?>
+        </table>
+        <input type="submit" value="Liberar" name="save2"></td> 
+    </form>
+</div>
 </body>
 </html>
