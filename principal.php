@@ -3,25 +3,18 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="css/estilos.css">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
 </head>
 <body>
 	<!-- Barra de Navegacion -->
-<center>
-    <nav>
-        <ul class="menu">  
-            <li><a href="">Reservas</a></li>
-            <li><a href="historial.php">Historial</a></li>   
-            <li><a href="">Incidencias</a></li>
+
+
             <?php
             include "header.php";
             ?>
-            <a href=""><li style="position: absolute; right: 110px; top: 8px"></li></a>  
-        </ul>   
-    </nav>
-</center>
-<br><br><br>
-<!-- Filtros -->
+
+ <!-- Filtros -->
 <form action="filtros.php" method="post">
     <input type="checkbox" name="sala" value="S" <?php
     if (isset($_GET['fl'])) {
@@ -39,7 +32,7 @@
         }
     }
     ?>> Objeto
-    <input type="submit" value="Filtrar">
+    <input class="boton" type="submit" value="Filtrar">
 </form><br>
 <!--------------------------------Tabla de reservas general --------------------------------------->
 <table class="tabla">
@@ -147,10 +140,11 @@
 
     <!--------------------------------Tabla de reservas del propio usuario --------------------------------------->
         </table>
-        <input type="submit" value="reservar" name="save"></td> 
+        <br>
+        <input style="margin-left: 400px;" class="boton" type="submit" value="reservar" name="save"></td> 
     </form>
 </div>
-<div style="position: relative; left: 750px; bottom: 400px">
+<div style="position: absolute; left: 640px; top: 56px">
     <form action="reservar.php" method="post" enctype="multipart/form-data">
         <table border="1" >  
             <tr>
@@ -194,8 +188,9 @@
                 }
             ?>
         </table>
-        <input type="submit" value="Liberar" name="save2"></td> 
+        <br>
+        <input style="margin-left: 540px;" class="boton" type="submit" value="Liberar" name="save2"></td> 
     </form>
-</div>
+
 </body>
 </html>

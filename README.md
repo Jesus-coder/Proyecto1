@@ -4,6 +4,6 @@ Este proyecto trata de una web donde se pueden reservar recursos en una intranet
 La web tiene un login de usuarios registrados y un formulario donde reservar los recursos y ver la disponibilidad del mismo.
 
 CV Sergio: https://sergiorueda99.github.io/
-CV Gerard: https://pazos99.github.io/
+CV Gerard:
 CV Victor:
-CV Jesus: https://jesus-coder.github.io/
+CV Jesus:

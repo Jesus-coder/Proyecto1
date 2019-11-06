@@ -3,23 +3,12 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="css/estilos.css">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 	<!-- Barra de Navegacion -->
-<center>
-<nav>
-        <ul class="menu">  
-            <li><a href="principal.php">Reservas</a></li>
-            <li><a href="">Historial</a></li>   
-            <li><a href="">Incidencias</a></li>
             <?php
             include "header.php";
             ?>
-            <a href=""><li style="position: absolute; right: 110px; top: 8px"></li></a>  
-        </ul>   
-</nav>
-</center>
 <br><br><br>
 
 <form action="reservar.php" method="incidecia.proc.php" enctype="multipart/form-data">
