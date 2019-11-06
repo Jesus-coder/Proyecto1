@@ -41,6 +41,7 @@
     ?>> Objeto
     <input type="submit" value="Filtrar">
 </form><br>
+<!--------------------------------Tabla de reservas general --------------------------------------->
 <table class="tabla">
     <?php
     //Conectamos a la base de datos
@@ -144,7 +145,7 @@
                       
 
 
-            <!---Tabla de reservas del propio usuario --->
+    <!--------------------------------Tabla de reservas del propio usuario --------------------------------------->
         </table>
         <input type="submit" value="reservar" name="save"></td> 
     </form>
