@@ -6,4 +6,4 @@ La web tiene un login de usuarios registrados y un formulario donde reservar los
 CV Sergio: https://sergiorueda99.github.io/
 CV Gerard: https://pazos99.github.io/
 CV Victor:
-CV Jesus:
+CV Jesus: https://jesus-coder.github.io/
