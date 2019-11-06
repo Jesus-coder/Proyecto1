@@ -181,6 +181,7 @@
                             <td><?php echo $fila[7]; ?></td>
 
                             <td><input type="checkbox" name="recurso[]" value="<?php echo $fila[0]; ?>"></td>
+                            <td><a href="#?id = <?php echo $fila[0];?>"><img border="0" title="Abrir incidencia" alt="exclamación" src="imagenes/exclamacion.png" width="20" height="20"></a></td>
                         </tr> 
                         <?php
                     }
