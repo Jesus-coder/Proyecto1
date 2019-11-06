@@ -181,7 +181,7 @@
                             <td><?php echo $fila[7]; ?></td>
 
                             <td><input type="checkbox" name="recurso[]" value="<?php echo $fila[0]; ?>"></td>
-                            <td><a href="#?id = <?php echo $fila[0];?>"><img border="0" title="Abrir incidencia" alt="exclamación" src="imagenes/exclamacion.png" width="20" height="20"></a></td>
+                            <td><a href="#incidencia/?id = <?php echo $fila[0];?>"><img border="0" title="Abrir incidencia" alt="exclamación" src="imagenes/exclamacion.png" width="20" height="20"></a></td>
                         </tr> 
                         <?php
                     }
@@ -192,6 +192,15 @@
         <br>
         <input style="margin-left: 540px;" class="boton" type="submit" value="Liberar" name="save2"></td> 
     </form>
-
+<div id="incidencia" class="modalmask">
+        <div class="modalbox movedown" id="resultadoContent">
+            <a href="principal.php" title="Close" class="close">X</a>
+            <form action="incidencia.proc.php" method="post" enctype="multipart/form-data">
+            <legend>Incidencia</legend>
+            <textarea type="text" placeholder="Descripción de incidencia" style="height: 90%;width:90%;position: relative;"></textarea><br>
+            <input type="submit" value="Enviar" name="incidencia"></td> 
+        </form>
+    </div>
+</div>
 </body>
 </html>
