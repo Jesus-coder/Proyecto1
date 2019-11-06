@@ -55,10 +55,6 @@
 				            	<img src="imagenes/incidencias.png" height="40" class="mr-4"><span>Incidencias</span>
 				        	</a>
 				          </li>';
-
-				}else{
-					// Si la consulta está vacia entraremos aquí, este comando hace que el botón de cerrar sesión se muestre de forma correcta
-					echo '<li class="list-group-item py-2"  style="margin-top: 435px">';
 				}
 				if (null!=(mysqli_fetch_array($qry_res_admin))) {
 					echo '<li class="list-group-item py-2">
@@ -70,6 +66,9 @@
 				          </li>
 				          <!-- El último li nos sirve para que el botón de cerrar sesión del menú se muestre a la altura correcta si incluimos el botón de Incidencias -->
 				          <li class="list-group-item py-2"  style="margin-top: 305.5px">';
+				}else{
+					// Si la consulta está vacia entraremos aquí, este comando hace que el botón de cerrar sesión se muestre de forma correcta
+					echo '<li class="list-group-item py-2"  style="margin-top: 435px">';
 				}
 				?>
 					<!-- Redireccionamiento correspondiente al elemento -->
