@@ -184,7 +184,7 @@
                             
                             <?php $idrecurso = $fila[0];
                              $nomrecurso=$fila[1];?>
-                            <td><a href="#myModal" id='enlace' data-toggle="modal" data-id="<?php echo $fila[0];?>" onclick= 'executeJS(<?php echo$idrecurso;?>,<?php echo'"'.$nomrecurso.'"';?>)'><img border="0" title="Abrir incidencia" alt="exclamación" src="imagenes/exclamacion.png" width="20" height="20"></a></td>
+                            <td><a href="#myModal" data-id="<?php echo $fila[0];?>" onclick= 'executeJS(<?php echo$idrecurso;?>,<?php echo'"'.$nomrecurso.'"';?>)'><img border="0" title="Abrir incidencia" alt="exclamación" src="imagenes/exclamacion.png" width="20" height="20"></a></td>
                         </tr> 
                         <?php
                     }
@@ -197,20 +197,18 @@
     </form>
     <div id="myModal" class="modalmask">
             <div class="modalbox movedown" id="resultadoContent">
-
                 <a href="principal.php" title="Close" class="close">X</a>
-                <form action="incidencia.proc.php" method="post" enctype="multipart/form-data">
+                <form action="incidencias.proc.php" method="post" enctype="multipart/form-data">
                     <legend>Incidencia</legend>
                     <p id='mensaje_incidencia'></p>
-                    <input type='text' name='idrecurso' id="info" disabled/>
-                    <input type='text' name='nombrerecurso' id="nrecurso" disabled/>
+                    <input type='text' name="idrecurso" id="info" value="" style="display: none"/>
+                    <input type='text' id="nrecurso" disabled/>
                     <textarea type="text" name='desc' placeholder="Descripción de incidencia" style="height: 90%;width:90%;position: relative;"></textarea><br>
-                    <input type="submit" value="Enviar" name="incidencia"></td>
-                    <script type="text/javascript">
+                <input type="submit" value="Enviar" name="incidencia">
+                <script type="text/javascript">
                         function executeJS(id,nom)
                         {
-                            var a = document.getElementById('info');
-                            a.value = id; 
+                            var a = document.getElementById('info').setAttribute("value",id);
                             var b = document.getElementById('nrecurso'); 
                             b.value = nom;
                         }

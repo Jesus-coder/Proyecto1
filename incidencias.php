@@ -12,6 +12,7 @@
 <br><br><br>
 
 <form action="reservar.php" method="incidecia.proc.php" enctype="multipart/form-data">
+<table border="1" class="tabla">
 <?php
 //Conectamos a la base de datos
     require_once 'conexion.php';
@@ -31,6 +32,7 @@
                     echo '</tr>';
     }
 ?>
+</table>
 </form>
 
 
