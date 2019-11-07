@@ -29,6 +29,12 @@ while ($res = mysqli_fetch_array($sql_user)) {
     $sql = mysqli_query($connexion, "SELECT R.id_reservas, R.inicio_reservas, R.final_reservas, T.nombre_recursos FROM tbl_reservas R LEFT JOIN tbl_recursos T ON R.id_recursos=T.id_recursos WHERE R.id_usuarios='$id_user'");
 //Mostrar la tabla
     echo '<th align="center" colspan="4">Historial</th>';
+    echo '<tr class="tabla">';
+    echo '<th class="tabla">ID</th>';
+    echo '<th class="tabla">INICIO</th>';
+    echo '<th class="tabla">FINAL</th>';
+    echo '<th class="tabla">RECURSO</th>';
+    echo '</tr>';
     while ($res = mysqli_fetch_array($sql)) {
                     echo '<tr class="tabla">';
                     echo '<th class="tabla">' . $res["id_reservas"] . '</th>';
