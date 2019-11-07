@@ -42,10 +42,12 @@
 				$txt_qry_admin="SELECT nombre_usuarios FROM tbl_usuarios WHERE nombre_usuarios='$name' and admin_usuarios=1";
 				// Ahora hacemos la consulta a nuestra base de datos con la consulta que hemos echo anteriormente
 				$qry_res_all=mysqli_query($connexion,$txt_qry_all);
+				// Realizamos la consulta de nuevo pero la guardamos en otra variable para solucionar un error en los if
+				$qry_res_all2=mysqli_query($connexion,$txt_qry_all);
 				// Ahora hacemos la consulta a nuestra base de datos con la consulta que hemos echo anteriormente
 				$qry_res_admin=mysqli_query($connexion,$txt_qry_admin);
 				// Ahora en este if combrobamos si la consulta está vacia, si contiene algo (será el nombre del usuario actual) o por lo contrario no entrará y no mostrará el botón de Incidencias
-				if(null!=(mysqli_fetch_array($qry_res_all))){
+				if (null!=(mysqli_fetch_array($qry_res_all))){
 					// Como estamos dentro de un php, para que se nos muestre el codigo html tenemos que hacer un echo
 					
 			        echo '<li class="list-group-item py-2">
@@ -61,15 +63,19 @@
 			        		<!-- Redireccionamiento correspondiente al elemento -->
 				        	<a href="usuarios.php">
 				        		<!-- Imagen del menu y texto que se muestra cuando se desplega -->
-				            	<img src="imagenes/usuarios.png" height="40" class="mr-4"><span>Incidencias</span>
+				            	<img src="imagenes/usuarios.png" height="40" class="mr-4"><span>Usuarios</span>
 				        	</a>
 				          </li>
 				          <!-- El último li nos sirve para que el botón de cerrar sesión del menú se muestre a la altura correcta si incluimos el botón de Incidencias -->
 				          <li class="list-group-item py-2"  style="margin-top: 305.5px">';
-				}else{
+				}elseif (null!=(mysqli_fetch_array($qry_res_all2))){
 					// Si la consulta está vacia entraremos aquí, este comando hace que el botón de cerrar sesión se muestre de forma correcta
+					echo '<li class="list-group-item py-2"  style="margin-top: 370px">';
+				}else{
+					// Si la consulta tiene datos entraremos aquí, este comando hace que el botón de cerrar sesión se muestre de forma correcta
 					echo '<li class="list-group-item py-2"  style="margin-top: 435px">';
 				}
+				
 				?>
 					<!-- Redireccionamiento correspondiente al elemento -->
         			<a href="logout.php">
