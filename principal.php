@@ -181,7 +181,10 @@
                             <td><?php echo $fila[7]; ?></td>
 
                             <td><input type="checkbox" name="recurso[]" value="<?php echo $fila[0]; ?>"></td>
-                            <td><a href="#incidencia/?id = <?php echo $fila[0];?>"><img border="0" title="Abrir incidencia" alt="exclamación" src="imagenes/exclamacion.png" width="20" height="20"></a></td>
+                            
+                            <?php $idrecurso = $fila[0];
+                            ?>
+                            <td><a href="#myModal" id='enlace' data-toggle="modal" data-id="<?php echo $fila[0];?>" onclick= "executeJS(<?php echo $idrecurso;?>"><img border="0" title="Abrir incidencia" alt="exclamación" src="imagenes/exclamacion.png" width="20" height="20"></a></td>
                         </tr> 
                         <?php
                     }
@@ -192,15 +195,37 @@
         <br>
         <input style="margin-left: 540px;" class="boton" type="submit" value="Liberar" name="save2"></td> 
     </form>
-<div id="incidencia" class="modalmask">
+<div id="myModal" class="modalmask">
         <div class="modalbox movedown" id="resultadoContent">
+            <?php 
+             //$idrecurso = $_GET['id']; 
+            //echo $idrecurso?>
             <a href="principal.php" title="Close" class="close">X</a>
             <form action="incidencia.proc.php" method="post" enctype="multipart/form-data">
             <legend>Incidencia</legend>
+            <p id='mensaje_incidencia'></p>
+            <input type='text' name='idrecurso' id="info" disabled/>
+            <input type='text' name='idrecurso' id="nrecurso" disabled/>
             <textarea type="text" placeholder="Descripción de incidencia" style="height: 90%;width:90%;position: relative;"></textarea><br>
-            <input type="submit" value="Enviar" name="incidencia"></td> 
-        </form>
-    </div>
-</div>
+            <input type="submit" value="Enviar" name="incidencia"></td>
+            <script type="text/javascript">
+        function executeJS(id){
+       //var rowid = $(this).attr('data-id');
+       //document.write(rowid);
+       //var id = document.getElementById('enlace');
+        //var idrecurso = id.getAttribute('data-id');
+        //document.write(id);
+        var a = document.getElementById('info');
+        a.value = id; 
+        //document.getElementById("mensaje_incidencia").innerHTML = "Abrir incidencia de"+nom;
+
+
+        /*
+        proceed with rest of modal using the rowid variable as necessary 
+        */
+    }
+        </script> 
+    </form>
+
 </body>
 </html>
