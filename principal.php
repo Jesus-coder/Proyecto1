@@ -186,7 +186,7 @@
                              $nomrecurso=$fila[1];
                              $tiporecurso = $fila[5];?>
 
-                            <td><a href="#myModal" id='enlace' data-toggle="modal" data-id="<?php echo $fila[0];?>" onclick= 'executeJS(<?php echo$idrecurso;?>,<?php echo'"'.$nomrecurso.'"';?>,<?php echo'"'.$tiporecurso.'"';?>)'><img border="0" title="Abrir incidencia" alt="exclamación" src="imagenes/exclamacion.png" width="20" height="20"></a></td>
+                            <td><a href="#myModal" id='enlace' data-id="<?php echo $fila[0];?>" onclick= 'executeJS(<?php echo$idrecurso;?>,<?php echo'"'.$nomrecurso.'"';?>,<?php echo'"'.$tiporecurso.'"';?>)'><img border="0" title="Abrir incidencia" alt="exclamación" src="imagenes/exclamacion.png" width="20" height="20"></a></td>
                         </tr> 
                         <?php
                     }
