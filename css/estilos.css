@@ -134,3 +134,7 @@ body {
 .movedown {
 	margin: 0 auto;
 }
+
+#todo{
+width: 50px;
+}
