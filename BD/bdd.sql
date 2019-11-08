@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2019 a las 15:20:01
--- Versión del servidor: 10.1.31-MariaDB
--- Versión de PHP: 7.2.3
+-- Tiempo de generación: 08-11-2019 a las 16:58:37
+-- Versión del servidor: 10.4.6-MariaDB
+-- Versión de PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,17 +25,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_indicencias`
+-- Estructura de tabla para la tabla `tbl_incidencias`
 --
 
-CREATE TABLE `tbl_indicencias` (
+CREATE TABLE `tbl_incidencias` (
   `id_incidencias` int(4) NOT NULL,
-  `inicio_incidencias` date NOT NULL,
-  `final_incidencias` date NOT NULL,
-  `informe_incidencias` varchar(300) NOT NULL,
-  `id_recursos` int(4) NOT NULL,
-  `id_usuarios` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `inicio_incidencias` date NOT NULL COMMENT 'Inicio de incidencia',
+  `final_incidencias` date DEFAULT NULL COMMENT 'Final de incidencia',
+  `informe_incidencias` varchar(300) CHARACTER SET latin1 NOT NULL COMMENT 'Descripción',
+  `id_recursos` int(4) NOT NULL COMMENT 'Recurso',
+  `id_usuarios` int(4) NOT NULL COMMENT 'Usuario'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -82,8 +82,8 @@ INSERT INTO `tbl_recursos` (`id_recursos`, `nombre_recursos`, `estado_recursos`,
 
 CREATE TABLE `tbl_reservas` (
   `id_reservas` int(4) NOT NULL,
-  `inicio_reservas` datetime DEFAULT NULL,
-  `final_reservas` datetime DEFAULT NULL,
+  `inicio_reservas` datetime DEFAULT NULL COMMENT 'Inicio de reserva',
+  `final_reservas` datetime DEFAULT NULL COMMENT 'Final de reserva',
   `id_usuarios` int(4) NOT NULL,
   `id_recursos` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -117,7 +117,7 @@ CREATE TABLE `tbl_usuarios` (
   `id_usuarios` int(4) NOT NULL,
   `nombre_usuarios` varchar(25) NOT NULL,
   `pwd_usuarios` varchar(50) NOT NULL,
-  `estado_usuarios` int(1) NOT NULL,
+  `estado_usuarios` varchar(25) NOT NULL,
   `admin_usuarios` int(1) NOT NULL,
   `informatico_usuarios` int(1) NOT NULL,
   `normal_usuarios` int(1) NOT NULL
@@ -128,21 +128,21 @@ CREATE TABLE `tbl_usuarios` (
 --
 
 INSERT INTO `tbl_usuarios` (`id_usuarios`, `nombre_usuarios`, `pwd_usuarios`, `estado_usuarios`, `admin_usuarios`, `informatico_usuarios`, `normal_usuarios`) VALUES
-(1, 'Gerard', '81dc9bdb52d04dc20036dbd8313ed055', 1, 1, 0, 0),
-(2, 'Sergio', '81dc9bdb52d04dc20036dbd8313ed055', 1, 1, 0, 0),
-(3, 'Victor', '81dc9bdb52d04dc20036dbd8313ed055', 1, 0, 1, 0),
-(4, 'Jesus', '81dc9bdb52d04dc20036dbd8313ed055', 1, 0, 1, 0),
-(5, 'Juanma', '81dc9bdb52d04dc20036dbd8313ed055', 1, 0, 0, 1),
-(6, 'Daniel', '81dc9bdb52d04dc20036dbd8313ed055', 1, 0, 0, 1);
+(1, 'Gerard', '81dc9bdb52d04dc20036dbd8313ed055', 'enabled', 1, 0, 0),
+(2, 'Sergio', '81dc9bdb52d04dc20036dbd8313ed055', 'enabled', 1, 0, 0),
+(3, 'Victor', '81dc9bdb52d04dc20036dbd8313ed055', 'enabled', 0, 1, 0),
+(4, 'Jesus', '81dc9bdb52d04dc20036dbd8313ed055', 'enabled', 0, 1, 0),
+(5, 'Juanma', '81dc9bdb52d04dc20036dbd8313ed055', 'enabled', 0, 0, 1),
+(6, 'Daniel', '81dc9bdb52d04dc20036dbd8313ed055', 'enabled', 0, 0, 1);
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `tbl_indicencias`
+-- Indices de la tabla `tbl_incidencias`
 --
-ALTER TABLE `tbl_indicencias`
+ALTER TABLE `tbl_incidencias`
   ADD PRIMARY KEY (`id_incidencias`),
   ADD KEY `FK_usuarios_incidencias` (`id_usuarios`),
   ADD KEY `FK_recursos_incidencias` (`id_recursos`);
@@ -179,10 +179,10 @@ ALTER TABLE `tbl_usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `tbl_indicencias`
+-- AUTO_INCREMENT de la tabla `tbl_incidencias`
 --
-ALTER TABLE `tbl_indicencias`
-  MODIFY `id_incidencias` int(4) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbl_incidencias`
+  MODIFY `id_incidencias` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_recursos`
@@ -194,7 +194,7 @@ ALTER TABLE `tbl_recursos`
 -- AUTO_INCREMENT de la tabla `tbl_reservas`
 --
 ALTER TABLE `tbl_reservas`
-  MODIFY `id_reservas` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_reservas` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_tiporecursos`
@@ -213,9 +213,9 @@ ALTER TABLE `tbl_usuarios`
 --
 
 --
--- Filtros para la tabla `tbl_indicencias`
+-- Filtros para la tabla `tbl_incidencias`
 --
-ALTER TABLE `tbl_indicencias`
+ALTER TABLE `tbl_incidencias`
   ADD CONSTRAINT `FK_recursos_incidencias` FOREIGN KEY (`id_recursos`) REFERENCES `tbl_recursos` (`id_recursos`),
   ADD CONSTRAINT `FK_usuarios_incidencias` FOREIGN KEY (`id_usuarios`) REFERENCES `tbl_usuarios` (`id_usuarios`);
 
