@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-11-2019 a las 16:58:37
+-- Tiempo de generación: 08-11-2019 a las 17:31:50
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tbl_incidencias` (
   `id_incidencias` int(4) NOT NULL,
-  `inicio_incidencias` date NOT NULL COMMENT 'Inicio de incidencia',
-  `final_incidencias` date DEFAULT NULL COMMENT 'Final de incidencia',
-  `informe_incidencias` varchar(300) CHARACTER SET latin1 NOT NULL COMMENT 'Descripción',
+  `inicio_incidencias` datetime NOT NULL COMMENT 'Inicio de incidencia',
+  `final_incidencias` datetime DEFAULT NULL COMMENT 'Final de incidencia',
+  `informe_incidencias` varchar(300) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL COMMENT 'Descripcion',
   `id_recursos` int(4) NOT NULL COMMENT 'Recurso',
   `id_usuarios` int(4) NOT NULL COMMENT 'Usuario'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -182,7 +182,7 @@ ALTER TABLE `tbl_usuarios`
 -- AUTO_INCREMENT de la tabla `tbl_incidencias`
 --
 ALTER TABLE `tbl_incidencias`
-  MODIFY `id_incidencias` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_incidencias` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_recursos`
@@ -194,7 +194,7 @@ ALTER TABLE `tbl_recursos`
 -- AUTO_INCREMENT de la tabla `tbl_reservas`
 --
 ALTER TABLE `tbl_reservas`
-  MODIFY `id_reservas` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id_reservas` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_tiporecursos`
