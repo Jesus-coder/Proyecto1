@@ -60,7 +60,7 @@
 <div>
     <form action="reservar.php" method="post" enctype="multipart/form-data">
     <!---Tabla de recursos que ven todos los usuarios --->
-        <table id="reservar" border="1">
+        <table id="1" border="1">
             <tr>
                 <th align='center'colspan="4">Reservas</th>
             </tr>
@@ -105,7 +105,7 @@
                     }
                 }
             }
-            echo "<th id='todo'><input type='checkbox' onchange='SelectAll(this)' name='recurso[]'><label>Todo</label></th>";
+            echo "<th id='todo'><input type='checkbox' onchange='SelectAll(this,1)' name='recurso[]'><label>Todo</label></th>";
             echo "</tr>";
             //Ejecución de la consulta para mostrar tabla recursos
             $recursos = mysqli_query($connexion, $sqlrecursos);
@@ -143,7 +143,7 @@
 </div>
 <div style="position: absolute; left: 640px; top: 56px">
     <form action="reservar.php" method="post" enctype="multipart/form-data">
-        <table border="1" id="misreservas">  
+        <table border="1" id="2">  
             <tr>
                 <th align='center' colspan="5">Mis Reservas</th>
             </tr>
@@ -162,6 +162,7 @@
                         }
                     }
                 }
+                echo "<th id='todo'><input type='checkbox' onchange='SelectAll(this,2)' name='recurso[]'><label>Todo</label></th>";
                 echo "</tr>";
                 //Ejecución consulta de la tabla de mis reservas
                 $recursos2 = mysqli_query($connexion, $sqlrecursos2);

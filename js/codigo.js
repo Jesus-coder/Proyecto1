@@ -49,8 +49,8 @@ for (var i = 0; i < td.length; i++) {
 }
 
 
-function SelectAll(ele) {
-     var table = document.getElementById('reservar');
+function SelectAll(ele,id) {
+     var table = document.getElementById(id);
      var checkboxes = table.getElementsByTagName('input');
      if (ele.checked) {
          for (var i = 0; i < checkboxes.length; i++) {
