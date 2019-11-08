@@ -199,7 +199,7 @@
             <div class="modalbox movedown" id="resultadoContent">
 
                 <a href="principal.php" title="Close" class="close">X</a>
-                <form action="incidencias.proc.php" method="post" enctype="multipart/form-data">
+                <form action="incidencias.proc.php" method="post" enctype="multipart/form-data" onsubmit = "return ValidacionIncidencia()">
                     <legend>Incidencia</legend>
                     <p id='mensaje_incidencia'></p>
                     <input type='hidden' name='idrecurso' id="info" value=""/>

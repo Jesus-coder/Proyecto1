@@ -67,3 +67,14 @@ function SelectAll(ele,id) {
          }
      }
  }
+ 
+ function ValidacionIncidencia(){
+	var desc = document.getElementById('desc').value;
+        if(desc == ''){
+		document.getElementById('alerta').innerHTML = 'Introduce una descripción de la incidencia';
+                document.getElementById('desc').style.border = '2px solid red';
+                return false;
+        }else{
+            return true;
+        }
+}
