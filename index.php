@@ -44,7 +44,7 @@ and open the template in the editor.
                     </tr>
                 </table>
                 <p id="alerta" class="alerta"></p>
-                <h2 style="position: absolute; bottom: 10px; left: 560px; "><a href="presentacion.html">Pagina de presentación</a></h2>
+                <h2><a href="presentacion.html">Pagina de presentación</a></h2>
         </form>
         </center>
     </body>

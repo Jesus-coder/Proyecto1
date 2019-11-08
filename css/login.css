@@ -5,7 +5,7 @@ table {
 	width: 500px;
 }
 body {
-	background-color: #FFDE90;
+	background-color: #FFFFBF;
 }
 .borde {
 	background-color: #FFC94D;
@@ -38,4 +38,11 @@ legend {
 }
 p {
 	font-size: 25px;
+}
+
+a {
+	color: #FFC94D;
+	text-align: center;
+	bottom: 10px; 
+
 }
