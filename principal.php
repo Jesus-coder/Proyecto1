@@ -138,7 +138,7 @@
     <!--------------------------------Tabla de reservas del propio usuario --------------------------------------->
         </table>
         <br>
-        <input style="margin-left: 428px;" class="boton" type="submit" value="reservar" name="save"></td> 
+        <input style="margin-left: 428px;" class="boton" type="submit" value="Reservar" name="save"></td> 
     </form>
 </div>
 <div style="position: absolute; left: 640px; top: 56px">
