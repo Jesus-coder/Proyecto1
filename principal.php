@@ -3,16 +3,13 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="css/estilos.css">
-
-
+    <script type="text/javascript" src="js/codigo.js"></script>
 </head>
 <body>
 	<!-- Barra de Navegacion -->
-
-
-            <?php
-            include "header.php";
-            ?>
+    <?php
+    include "header.php";
+    ?>
 
  <!-- Filtros -->
 <form action="filtros.php" method="post">
@@ -63,7 +60,7 @@
 <div>
     <form action="reservar.php" method="post" enctype="multipart/form-data">
     <!---Tabla de recursos que ven todos los usuarios --->
-        <table border="1">
+        <table id="reservar" border="1">
             <tr>
                 <th align='center'colspan="4">Reservas</th>
             </tr>
@@ -108,6 +105,7 @@
                     }
                 }
             }
+            echo "<th id='todo'><input type='checkbox' onchange='SelectAll(this)' name='recurso[]'><label>Todo</label></th>";
             echo "</tr>";
             //Ejecución de la consulta para mostrar tabla recursos
             $recursos = mysqli_query($connexion, $sqlrecursos);
@@ -134,8 +132,7 @@
                         <?php 
                 } 
             }     
-                        ?>
-                      
+                        ?>        
 
 
     <!--------------------------------Tabla de reservas del propio usuario --------------------------------------->
@@ -146,7 +143,7 @@
 </div>
 <div style="position: absolute; left: 640px; top: 56px">
     <form action="reservar.php" method="post" enctype="multipart/form-data">
-        <table border="1" >  
+        <table border="1" id="misreservas">  
             <tr>
                 <th align='center' colspan="5">Mis Reservas</th>
             </tr>
@@ -201,26 +198,16 @@
             <div class="modalbox movedown" id="resultadoContent">
 
                 <a href="principal.php" title="Close" class="close">X</a>
-                <form action="incidencia.proc.php" method="post" enctype="multipart/form-data">
+                <form action="incidencias.proc.php" method="post" enctype="multipart/form-data">
                     <legend>Incidencia</legend>
                     <p id='mensaje_incidencia'></p>
                     <input type='hidden' name='idrecurso' id="info" value=""/>
                     <input type='hidden' name='nombrerecurso' id="nrecurso" disabled/>
                     <textarea type="text" name='desc' placeholder="Descripción de incidencia" style="height: 90%;width:90%;position: relative;"></textarea><br>
-                    <input type="submit" value="Enviar" name="incidencia"></td>
-                    <script type="text/javascript">
-                        function executeJS(id,nom,tipo)
-                        {
-                            //var a = document.getElementById('info');
-                            //a.value = id; 
-                            var b = document.getElementById('nrecurso'); 
-                            b.value = nom;
-                            var a = document.getElementById('info').setAttribute("value", id);
-                            var c = document.getElementById('mensaje_incidencia').innerHTML = "Abrir incidencia de " + tipo + " de " + nom
-                        }
-                </script> 
+                    <input type="submit" value="Enviar" name="incidencia"></td>                
             </form>
         </div>
     </div>
-</body>
+    <script type="text/javascript" src="js/codigo.js"></script>
+ </body>
 </html>

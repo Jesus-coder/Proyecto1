@@ -3,6 +3,7 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="css/estilos.css">
+    <meta charset="UTF-8">
 </head>
 <body>
 	<!-- Barra de Navegacion -->

@@ -3,6 +3,7 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="css/estilos.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body>
 	<!-- Barra de Navegacion -->
@@ -11,28 +12,54 @@
             ?>
 <br><br><br>
 
-<form action="reservar.php" method="incidecia.proc.php" enctype="multipart/form-data">
+<form action="reservar.php" method="POST" enctype="multipart/form-data">
 <table border="1" class="tabla">
 <?php
 //Conectamos a la base de datos
     require_once 'conexion.php';
+    $sqlcomment = "SELECT column_comment FROM information_schema.columns WHERE table_name = 'tbl_incidencias' ORDER BY FIELD(column_comment, 'Recurso') DESC";
+    $comments = mysqli_query($connexion, $sqlcomment);
+    while(($comment = mysqli_fetch_array($comments, MYSQLI_ASSOC)))
+    { 
+        if($comment['column_comment']!=="")
+                           
+        {                       
+            foreach ($comment as $head)
+            {
+                echo "<th align='center'>". $head . "</th>";                        
+            }
+        }    
+    }
+    echo "</tr>";
     
 //Creamos la consulta de los registros del usuario
-    $sql = mysqli_query($connexion, "SELECT * FROM tbl_indicencias");
+    $sql = mysqli_query($connexion, "SELECT *, tbl_recursos.nombre_recursos 
+                                    FROM tbl_incidencias
+                                    INNER JOIN tbl_recursos
+                                    on tbl_recursos.id_recursos = tbl_incidencias.id_recursos");
 //Mostrar la tabla
     while ($res = mysqli_fetch_array($sql)) {
-                    echo '<tr class="tabla">';
-                    echo '<th class="tabla">' . $res["id_incidencias"] . '</th>';
-                    echo '<th class="tabla">' . $res["inicio_incidencias"] . '</th>';
-                    echo '<th class="tabla">' . $res["final_incidencias"] . '</th>';
-                    echo '<th class="tabla">' . $res["informe_incidencias"] . '</th>';
-                    echo '<th class="tabla">' . $res["id_recursos"] . '</th>';
-                    echo '<th class="tabla">' . $res["id_usuarios"] . '</th>';
-                    echo '<td><input type="checkbox" name="incidencia[]" value="<?php echo $fila[0]; ?>"></td>';
-                    echo '</tr>';
+        ?>
+                    <tr class="tabla">
+                    <td class="tabla"><?php echo$res["nombre_recursos"];?></td>
+                    <td class="tabla"><?php echo$res["inicio_incidencias"];?> </td>
+                    <?php
+                    if ($res["final_incidencias"]==NULL){
+                        echo '<td class="tabla">' . 'En curso' . '</td>';
+                    }else{
+                        echo '<td class="tabla">' . $res["final_incidencias"] . '</td>';
+                    }
+                    ?>
+                    <td class="tabla"><?php echo$res["informe_incidencias"];?> </td>
+                    
+                    <td class="tabla"><?php echo$res["id_usuarios"];?></td>
+                    <td><input type="checkbox" name="recurso[]" value="<?php echo $res[4];?>"></td>
+                    </tr>
+    <?php 
     }
 ?>
 </table>
+<input style="margin-left: 540px;" class="boton" type="submit" value="Liberar" name="save3"></td>
 </form>
 
 

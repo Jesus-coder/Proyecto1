@@ -1,4 +1,4 @@
-/*Barra de navegación*/
+﻿/*Barra de navegación*/
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
 
 [data-component='sidebar'] .sidebar {
@@ -133,4 +133,8 @@ body {
 
 .movedown {
 	margin: 0 auto;
+
+#todo{
+  width: 50px;
+}
 }
