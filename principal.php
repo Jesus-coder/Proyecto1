@@ -88,7 +88,7 @@
                             LEFT JOIN tbl_tiporecursos 
                             ON tbl_recursos.id_tiporecursos=tbl_tiporecursos.id_tiporecursos
                             LEFT JOIN tbl_reservas 
-                            ON tbl_reservas.id_recursos=tbl_recursos.id_recursos $orderby";
+                            ON tbl_reservas.id_recursos=tbl_recursos.id_recursos";
             $comments = mysqli_query($connexion, $sqlcomment);
             $userid = mysqli_fetch_assoc(mysqli_query($connexion, $id_usuario));
             //Bucle para recorrer la columna comentario de la tbl_recursos
