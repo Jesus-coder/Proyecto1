@@ -49,8 +49,8 @@ for (var i = 0; i < td.length; i++) {
 }
 
 
-function SelectAll(ele) {
-     var table = document.getElementById('reservar');
+function SelectAll(ele,id) {
+     var table = document.getElementById(id);
      var checkboxes = table.getElementsByTagName('input');
      if (ele.checked) {
          for (var i = 0; i < checkboxes.length; i++) {
@@ -67,3 +67,14 @@ function SelectAll(ele) {
          }
      }
  }
+
+function ValidacionIncidencia(){
+    var desc = document.getElementById('desc').value;
+        if(desc == ''){
+        document.getElementById('alerta').innerHTML = 'Introduce una descripción de la incidencia';
+                document.getElementById('desc').style.border = '2px solid red';
+                return false;
+        }else{
+            return true;
+        }
+}

@@ -60,7 +60,7 @@
 <div>
     <form action="reservar.php" method="post" enctype="multipart/form-data">
     <!---Tabla de recursos que ven todos los usuarios --->
-        <table id="reservar" border="1">
+        <table id="1" border="1">
             <tr>
                 <th align='center'colspan="4">Reservas</th>
             </tr>
@@ -105,7 +105,7 @@
                     }
                 }
             }
-            echo "<th id='todo'><input type='checkbox' onchange='SelectAll(this)' name='recurso[]'><label>Todo</label></th>";
+            echo "<th id='todo'><label>Todo</label><input type='checkbox' onchange='SelectAll(this,1)' name='recurso[]'></th>";
             echo "</tr>";
             //Ejecución de la consulta para mostrar tabla recursos
             $recursos = mysqli_query($connexion, $sqlrecursos);
@@ -138,12 +138,12 @@
     <!--------------------------------Tabla de reservas del propio usuario --------------------------------------->
         </table>
         <br>
-        <input style="margin-left: 400px;" class="boton" type="submit" value="reservar" name="save"></td> 
+        <input style="margin-left: 428px;" class="boton" type="submit" value="reservar" name="save"></td> 
     </form>
 </div>
 <div style="position: absolute; left: 640px; top: 56px">
     <form action="reservar.php" method="post" enctype="multipart/form-data">
-        <table border="1" id="misreservas">  
+        <table border="1" id="2">  
             <tr>
                 <th align='center' colspan="5">Mis Reservas</th>
             </tr>
@@ -162,6 +162,7 @@
                         }
                     }
                 }
+                echo "<th id='todo'><label>Todo</label><input type='checkbox' onchange='SelectAll(this,2)' name='recurso[]'></th>";
                 echo "</tr>";
                 //Ejecución consulta de la tabla de mis reservas
                 $recursos2 = mysqli_query($connexion, $sqlrecursos2);
@@ -192,19 +193,21 @@
             ?>
         </table>
         <br>
-        <input style="margin-left: 540px;" class="boton" type="submit" value="Liberar" name="save2"></td> 
+        <input style="margin-left: 0px;" class="boton" type="submit" value="Liberar" name="save2"></td> 
     </form>
     <div id="myModal" class="modalmask">
-            <div class="modalbox movedown" id="resultadoContent">
+            <div style="background-color: #FFFFBF; margin-top: 100px;" class="modalbox movedown" id="resultadoContent">
 
-                <a href="principal.php" title="Close" class="close">X</a>
-                <form action="incidencias.proc.php" method="post" enctype="multipart/form-data">
+                <a style="margin-left: 400px; background-color: red;color: white; border: 3px solid red" href="principal.php" title="Close" class="close">X</a>
+                <script type="text/javascript" src="js/codigo.js"></script> 
+                <form action="incidencias.proc.php" method="post" enctype="multipart/form-data" onsubmit = "return ValidacionIncidencia()">
                     <legend>Incidencia</legend>
                     <p id='mensaje_incidencia'></p>
                     <input type='hidden' name='idrecurso' id="info" value=""/>
                     <input type='hidden' name='nombrerecurso' id="nrecurso" disabled/>
-                    <textarea type="text" name='desc' placeholder="Descripción de incidencia" style="height: 90%;width:90%;position: relative;"></textarea><br>
-                    <input type="submit" value="Enviar" name="incidencia"></td>                
+                    <textarea type="text" name='desc' id="desc" placeholder="Descripción de incidencia" style="height: 70px;width:90%;position: relative;"></textarea><br>
+                    <p id="alerta" class="alerta" style="text-align: center;"></p>
+                    <input type="submit" class="boton" value="Enviar" name="incidencia"></td>                
             </form>
         </div>
     </div>
