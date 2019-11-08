@@ -9,4 +9,4 @@ La web tiene un login de usuarios registrados y un formulario donde reservar los
 [CV Jesús](https://Jesus-coder.github.io/)
 </br>
 # Página de presentación:
-Para ver la presentción pulsa [aquí:](https://jesus-coder.github.io/Proyecto1/presentacion.html)
+Para ver la presentción pulsa [aquí](https://jesus-coder.github.io/Proyecto1/presentacion.html)
