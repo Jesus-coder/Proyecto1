@@ -47,4 +47,29 @@ include("conexion.php");
 		}
 		header('Location: principal.php');  
 	}
+
+	    if(isset($_POST['save3']))
+    {
+		session_start();
+		$usuario = $_SESSION['nombre']; 
+		$fecha = date('Y-m-d H:i:s');
+		$checkbox1=$_POST['recurso'];   
+		foreach($checkbox1 as $chk1)  
+		{  
+		   	$selestado="SELECT estado_recursos FROM tbl_recursos WHERE `tbl_recursos`.`id_recursos` = $chk1";
+		   	echo $selestado;
+		   	$sql_query_estado=mysqli_query($connexion, $selestado);
+		    while(($estado = mysqli_fetch_array($sql_query_estado))) 
+		    {
+		      	
+			     
+			    $update="UPDATE `tbl_recursos` SET `estado_recursos` = 'disponible' WHERE `tbl_recursos`.`id_recursos` = $chk1";
+			    $sql_query_update=mysqli_query($connexion, $update);
+			    $update_fecha ="UPDATE `tbl_incidencias` SET `final_incidencias` = '$fecha'  WHERE `tbl_incidencias`.`id_recursos` = $chk1";
+			    $sql_query_update=mysqli_query($connexion, $update_fecha);
+		    }
+		         
+		}
+		header('Location: principal.php');  
+	}
 ?>

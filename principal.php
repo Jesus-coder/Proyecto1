@@ -60,7 +60,7 @@
 <div>
     <form action="reservar.php" method="post" enctype="multipart/form-data">
     <!---Tabla de recursos que ven todos los usuarios --->
-        <table id="1" border="1">
+        <table id="reservar" border="1">
             <tr>
                 <th align='center'colspan="4">Reservas</th>
             </tr>
@@ -88,7 +88,7 @@
                             LEFT JOIN tbl_tiporecursos 
                             ON tbl_recursos.id_tiporecursos=tbl_tiporecursos.id_tiporecursos
                             LEFT JOIN tbl_reservas 
-                            ON tbl_reservas.id_recursos=tbl_recursos.id_recursos";
+                            ON tbl_reservas.id_recursos=tbl_recursos.id_recursos $orderby";
             $comments = mysqli_query($connexion, $sqlcomment);
             $userid = mysqli_fetch_assoc(mysqli_query($connexion, $id_usuario));
             //Bucle para recorrer la columna comentario de la tbl_recursos
@@ -105,7 +105,7 @@
                     }
                 }
             }
-            echo "<th id='todo'><input type='checkbox' onchange='SelectAll(this,1)' name='recurso[]'><label>Todo</label></th>";
+            echo "<th id='todo'><input type='checkbox' onchange='SelectAll(this)' name='recurso[]'><label>Todo</label></th>";
             echo "</tr>";
             //Ejecución de la consulta para mostrar tabla recursos
             $recursos = mysqli_query($connexion, $sqlrecursos);
@@ -143,7 +143,7 @@
 </div>
 <div style="position: absolute; left: 640px; top: 56px">
     <form action="reservar.php" method="post" enctype="multipart/form-data">
-        <table border="1" id="2">  
+        <table border="1" id="misreservas">  
             <tr>
                 <th align='center' colspan="5">Mis Reservas</th>
             </tr>
@@ -162,7 +162,6 @@
                         }
                     }
                 }
-                echo "<th id='todo'><input type='checkbox' onchange='SelectAll(this,2)' name='recurso[]'><label>Todo</label></th>";
                 echo "</tr>";
                 //Ejecución consulta de la tabla de mis reservas
                 $recursos2 = mysqli_query($connexion, $sqlrecursos2);
@@ -199,7 +198,7 @@
             <div class="modalbox movedown" id="resultadoContent">
 
                 <a href="principal.php" title="Close" class="close">X</a>
-                <form action="incidencias.proc.php" method="post" enctype="multipart/form-data" onsubmit = "return ValidacionIncidencia()">
+                <form action="incidencias.proc.php" method="post" enctype="multipart/form-data">
                     <legend>Incidencia</legend>
                     <p id='mensaje_incidencia'></p>
                     <input type='hidden' name='idrecurso' id="info" value=""/>

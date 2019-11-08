@@ -4,7 +4,7 @@ include("conexion.php");
 $id_recurso = $_REQUEST["idrecurso"];
 $descripcion = $_REQUEST["desc"];
 
-	//if(isset($_POST['incidencia'])){
+	if(isset($_POST['incidencia'])){
 		session_start(); //recupera la sesión actual
                 //Coger el id del usuario
                 $nombre_user = $_SESSION['nombre'];
@@ -14,11 +14,14 @@ $descripcion = $_REQUEST["desc"];
                 }
                 $fecha = date('Y-m-d H:i:s');//obtiene fecha actual
 		
-                $insert ="INSERT INTO `tbl_indicencias`(`id_incidencias`, `inicio_incidencias`, `final_incidencias`, `informe_incidencias`, `id_recursos`, `id_usuarios`) VALUES ('','$fecha', 'en curso', '$descripcion','$id_recurso','$id_user')";
+                $insert ="INSERT INTO `tbl_incidencias`( `inicio_incidencias`, `informe_incidencias`, `id_recursos`, `id_usuarios`) VALUES ('$fecha', '$descripcion','$id_recurso','$id_user')";
+
+                $update="UPDATE `tbl_recursos` SET `estado_recursos` = 'incidencia' WHERE `tbl_recursos`.`id_recursos` = $id_recurso";
+                $sql_query_update=mysqli_query($connexion, $update);
                 $sql_query_insert=mysqli_query($connexion, $insert);
-                //header('Location: principal.php'); 
+                header('Location: principal.php'); 
 		      
-		//}else{
+		}else{
 		         
-		//header('Location: principal.php');  
-                //}
+		header('Location: principal.php');  
+                }

@@ -4,7 +4,6 @@
 	<title></title>
 	<link rel="stylesheet" href="css/estilos.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type="text/javascript" src="js/codigo.js"></script>
 </head>
 <body>
 	<!-- Barra de Navegacion -->
@@ -14,7 +13,7 @@
 <br><br><br>
 
 <form action="reservar.php" method="POST" enctype="multipart/form-data">
-<table id="3" border="1" class="tabla">
+<table border="1" class="tabla">
 <?php
 //Conectamos a la base de datos
     require_once 'conexion.php';
@@ -31,7 +30,6 @@
             }
         }    
     }
-    echo "<th id='todo'><input type='checkbox' onchange='SelectAll(this,3)' name='recurso[]'><label>Todo</label></th>";
     echo "</tr>";
     
 //Creamos la consulta de los registros del usuario
